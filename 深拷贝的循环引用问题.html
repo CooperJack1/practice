@@ -7,11 +7,41 @@
 <body>
 <script>
     const obj = {
-        name:'cooper'
+        name: 'cooper',
+        arr: []
     };
     obj.sub = obj;
-    // 如何对含有递归的对象进行克隆，一般方法不行，栈会溢出
+    obj.arr.push(obj);
 
+    // 如何对含有递归的对象进行克隆，一般方法不行，栈会溢出
+    function deepClone(value) {
+        // 建立一个缓存机制
+        const cache = new Map();
+        function _deepClone(value) {
+            // 如果是空对象或者非对象数据 直接返回
+            if (value === null || typeof value !== 'object'){
+                return value
+            }
+            // 判断是否在缓存中
+            if (cache.has(value)){
+                return cache.get(value);
+            }
+            const result = Array.isArray(value) ? [] : {};
+            cache.set(value,result);
+            for (const valueKey in value) {
+                result[valueKey] = _deepClone(value[valueKey]);
+            }
+            return result
+        }
+
+        return _deepClone(value)
+    }
+
+    const newObj = deepClone(obj);
+    console.log(obj.sub !== newObj.sub);
+    console.log(obj.arr[0] !== newObj.arr[0]);
+    console.log(obj.sub === obj);
+    console.log(newObj.sub === newObj);
 </script>
 </body>
 </html>
