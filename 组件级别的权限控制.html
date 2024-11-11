@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <Authority #default="{ userPermissions }">
+
+    </Authority>
+</div>
+<template id="Authority">
+    <div>
+        <slot v-if="showSlot" :userPermissions="permissions"></slot>
+    </div>
+</template>
+<script>
+    const vue = new Vue({
+        el: '#app',
+        components: {
+            Authority: {
+                template: '#Authority',
+                props: {
+                    permission: {
+                        type: [Array, String]
+                    }
+                },
+                data() {
+                    return {
+                        permissions: [
+                            'sys:user:view',
+                            'sys:user:update',
+                            'sys:user:delete',
+                            'sys:user:add',
+                        ]
+                    }
+                },
+                computed: {
+                    showSlot() {
+                        if (!this.permission) {
+                            return true
+                        }
+                        if (!this.permissions) {
+                            return false
+                        }
+                        if (Array.isArray(this.permission)) {
+                            return this.permission.every(p => this.permissions.includes(p))
+                        } else {
+                            return this.permissions.includes(this.permission);
+                        }
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
