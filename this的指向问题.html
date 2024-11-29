@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this的指向问题</title>
+</head>
+<body>
+<script>
+    // 1.默认绑定规则
+    // 默认绑定全局对象window
+
+    /*function test(){
+        console.log(this === window);
+    }*/
+
+    // test();
+
+    // 2.隐式绑定规则
+    // 谁调用就指向谁
+    // 2.1对象内调用方法
+
+    /*const obj = {
+        name: 'obj',
+        foo: function () {
+            console.log(this);   //this指向obj
+        }
+    }*/
+
+    // obj1.foo();
+
+    /*const obj = {
+        name: 'obj',
+        foo: function () {
+            console.log(this); //obj
+            function test() {
+                console.log(this); //window  为什么？  因为test独立调用
+            }
+            test()
+        }
+    }*/
+
+    // obj.foo()
+
+    // 3.隐式丢失
+
+    /*const obj = {
+        name: 'obj',
+        foo: function () {
+            console.log(this); //window 为什么不是obj？  bar拿到obj.foo的引用，然后在全局下独立调用
+        }
+    }*/
+
+    // const bar = obj.foo
+
+    // bar()
+
+    // 4.函数作为参数
+
+    /*function foo() {
+        console.log(this); //window  obj.foo在bar函数内独立调用
+    }*/
+
+    /*function bar(fn) {
+        fn()
+    }*/
+
+    /*const obj = {
+        name: 'obj',
+        foo: foo
+    }*/
+
+    // bar(obj.foo)
+
+    // 5.显式绑定
+
+    // call,apply,bind
+
+    // 6.new绑定
+
+    // new绑定 > 显式绑定 > 隐式绑定 > 默认绑定
+</script>
+</body>
+</html>

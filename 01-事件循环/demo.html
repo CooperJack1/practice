@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello Mr Cooper</h1>
+<button>change</button>
+<script>
+    const h1 = document.querySelector('h1');
+    const button = document.querySelector('button');
+    const delay = (duration) => {
+        const start = Date.now();
+        while (Date.now() - start < duration) {
+        }
+    }
+    button.addEventListener('click', () => {
+        h1.textContent = '123';
+        delay(3000);
+    })
+</script>
+</body>
+</html>

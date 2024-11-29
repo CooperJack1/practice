@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="box" style="color:red"></div>
+<script>
+    // 浏览器的渲染原理
+    // 1.渲染主线程解析HTML,生成DOM树和CSSOM树
+    // 2.DOM树和CSSOM树合并生成所有带全部最终样式的DOM树 computed style
+    // 3.从带样式的DOM树生成几何布局树，确定每个节点的几何信息
+    // 4.浏览器对页面分层，生成每层的绘制指令集
+    // 以上工作都在渲染进程的渲染主线程中完成
+    // 生成渲染指令集后，渲染主线程把绘制任务派发到合成线程
+    // 5.分块器工作，把页面分成一块块的区域，优先绘制视口区域（Filing过程）
+    // 6.光栅化交给GPU进程生成位图（像素信息），和硬件交互完成渲染
+</script>
+</body>
+</html>
